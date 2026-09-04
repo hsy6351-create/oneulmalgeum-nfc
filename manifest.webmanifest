@@ -1,0 +1,9 @@
+{
+  "name": "독서 루틴 NFC 체험",
+  "short_name": "독서 루틴",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "lang": "ko-KR"
+}

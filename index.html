@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>독서 루틴 NFC 체험</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="stage" aria-label="독서 루틴 NFC 체험">
+    <div id="app" class="app-canvas">
+<!-- 1. NFC 인식 중 -->
+      <section class="screen screen-loading active" data-screen="1" aria-label="NFC 태그 인식 중">
+        <button class="close-btn close-dark" type="button" aria-label="닫기"><img src="assets/close.png" alt="" /></button>
+        <div class="loading-center">
+          <div class="fill-check" aria-hidden="true">
+            <div class="fill-check-base"></div>
+            <div class="fill-check-water"></div>
+            <span class="fill-check-mark"><img src="assets/loading_check.png" alt="" /></span>
+          </div>
+          <h1 class="loading-title"><span>자기계발서</span><br />태그 인식 중</h1>
+          <p class="loading-caption">잠시만 기다려주세요<span class="loading-dots" aria-hidden="true"></span></p>
+        </div>
+      </section>
+
+      <!-- 2. 루틴 시작 확인 -->
+      <section class="screen screen-start" data-screen="2" aria-label="독서 루틴 시작 확인">
+        <div class="start-blue"></div>
+        <img class="start-hero" src="assets/start_hero.png" alt="루틴 메이트 캐릭터" />
+        <img class="start-sparkle sp1" src="assets/start_sun.svg" alt="" />
+        <img class="start-sparkle sp2" src="assets/start_sun.svg" alt="" />
+        <img class="start-sparkle sp3" src="assets/start_sun.svg" alt="" />
+        <img class="start-sparkle sp4" src="assets/start_sun.svg" alt="" />
+        <button class="close-btn close-light" type="button" aria-label="닫기"><img src="assets/close.png" alt="" /></button>
+
+        <div class="start-content">
+          <h1 class="start-title"><span>독서 루틴</span>을<br />시작할까요?</h1>
+
+          <div class="routine-card routine-main-card">
+            <div class="icon-tile icon-white"><img src="assets/book.png" alt="" /></div>
+            <strong>독서 15분</strong>
+            <span class="pill pill-dark">시간 기록</span>
+          </div>
+
+          <button class="routine-card routine-tag-card" type="button" aria-label="자기계발서 칩 태그 상세">
+            <div class="icon-tile icon-sky"><img src="assets/tag.png" alt="" /></div>
+            <strong>칩 태그</strong>
+            <span class="pill pill-sky">자기계발서</span>
+            <img class="chevron" src="assets/chevron.png" alt="" />
+          </button>
+        </div>
+
+        <div class="bottom-actions start-actions">
+          <button id="startRoutine" class="primary-btn" type="button">루틴 시작하기</button>
+          <button id="laterBtn" class="text-btn" type="button">나중에 하기</button>
+        </div>
+      </section>
+
+      <!-- 3. 타이머 -->
+      <section class="screen screen-timer" data-screen="3" aria-label="독서 15분 타이머">
+        <button class="close-btn close-muted" type="button" aria-label="닫기"><img src="assets/close.png" alt="" /></button>
+        <header class="timer-header">
+          <h1>독서 15분</h1>
+          <span class="pill pill-sky timer-pill">시간 기록</span>
+        </header>
+
+        <div class="timer-ring-wrap">
+          <svg class="timer-ring" viewBox="0 0 320 320" aria-hidden="true">
+            <defs>
+              <linearGradient id="movingGradient" gradientUnits="userSpaceOnUse" x1="20" y1="30" x2="300" y2="290">
+                <stop offset="0%" stop-color="#E6F4FF" />
+                <stop offset="42%" stop-color="#89CCFF" />
+                <stop offset="100%" stop-color="#1495FF" />
+              </linearGradient>
+            </defs>
+            <circle class="timer-track" cx="160" cy="160" r="151"></circle>
+            <circle class="timer-gradient-circle" cx="160" cy="160" r="151"></circle>
+          </svg>
+          <div id="timerKnob" class="timer-knob" aria-hidden="true"><span></span></div>
+          <div class="timer-copy">
+            <span class="timer-label">남은 시간</span>
+            <strong id="timerText" class="timer-time">00:20</strong>
+          </div>
+        </div>
+
+        <div class="timer-controls">
+          <button id="pauseBtn" class="round-action round-action-muted" type="button">
+            <span id="pauseIconWrap" class="round-icon"><img src="assets/pause_button_icon.png" alt="" /></span>
+            <span id="pauseLabel">일시정지</span>
+          </button>
+          <button id="completeBtn" class="round-action round-action-primary" type="button">
+            <span class="round-icon"><img src="assets/complete_button_icon.png" alt="" /></span>
+            <span>완료</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- 4. 완료 -->
+      <section class="screen screen-done" data-screen="4" aria-label="루틴 완료">
+        <button class="close-btn close-muted" type="button" aria-label="닫기"><img src="assets/close.png" alt="" /></button>
+        <header class="done-header">
+          <h1>독서 15분</h1>
+          <span class="pill pill-sky timer-pill">시간 기록</span>
+        </header>
+
+        <div class="done-ring-wrap">
+          <svg class="done-ring" viewBox="0 0 320 320" aria-hidden="true">
+            <defs>
+              <linearGradient id="doneGradient" gradientUnits="userSpaceOnUse" x1="20" y1="30" x2="300" y2="290">
+                <stop offset="0%" stop-color="#E6F4FF" />
+                <stop offset="42%" stop-color="#89CCFF" />
+                <stop offset="100%" stop-color="#1495FF" />
+              </linearGradient>
+            </defs>
+            <circle cx="160" cy="160" r="151" fill="none" stroke="url(#doneGradient)" stroke-width="9"></circle>
+          </svg>
+          <div class="done-copy">
+            <img src="assets/done_check.png" class="done-check" alt="완료" />
+            <strong>다했어요</strong>
+            <span>15분을 다 채웠어요</span>
+          </div>
+        </div>
+
+        <div class="bottom-actions done-actions">
+          <button id="saveRoutine" class="primary-btn" type="button">이대로 기록하기</button>
+        </div>
+      </section>
+
+      <!-- 5. 에너지 보상 -->
+      <section class="screen screen-reward" data-screen="5" aria-label="에너지 보상">
+        <button class="close-btn close-muted" type="button" aria-label="닫기"><img src="assets/close.png" alt="" /></button>
+
+        <img id="rewardSpeech" class="reward-speech" src="assets/reward_speech.png" alt="수고했어요!" />
+
+        <div id="rewardVisual" class="reward-visual">
+          <img class="reward-character" src="assets/reward_character.png" alt="기뻐하는 루틴 메이트 캐릭터" />
+          <img class="reward-star rs1" src="assets/reward_star.png" alt="" />
+          <img class="reward-star rs2" src="assets/reward_star.png" alt="" />
+          <img class="reward-star rs3" src="assets/reward_star.png" alt="" />
+          <img class="reward-star rs4" src="assets/reward_star.png" alt="" />
+          <img class="reward-star rs5" src="assets/reward_star.png" alt="" />
+        </div>
+
+        <div class="reward-copy">
+          <h1>에너지 <span>+15</span> 획득</h1>
+          <p>독서 15분 완료해서 에너지를 받았어요</p>
+        </div>
+
+        <div class="reward-cards">
+          <div class="reward-card">
+            <div class="icon-tile icon-sky"><img src="assets/book.png" alt="" /></div>
+            <strong>독서 15분</strong>
+            <span class="pill pill-dark">시간 기록</span>
+          </div>
+          <div class="reward-card reward-energy-card">
+            <div class="icon-tile icon-sky reward-burst-tile"><span class="reward-burst"></span></div>
+            <div class="energy-copy">
+              <small>획득 보상</small>
+              <strong>에너지 <span>+15</span></strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-actions reward-actions">
+          <button id="claimReward" class="primary-btn" type="button">에너지 받기</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
